@@ -3,8 +3,8 @@ pipeline {
     tools { 
         maven 'mvn' 
     }
-    stages{
-        stage('Build'){
+    stages {
+        stage('Build') {
             steps {
                 sh 'mvn clean package'
             }
@@ -15,5 +15,10 @@ pipeline {
                 }
             }
         }
-    }
+        stage ('Desploy to Staging') {
+            steps {
+                build job: 'Deploy-to-staging'
+            }
+        }    
+    }    
 }
